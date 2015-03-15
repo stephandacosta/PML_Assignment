@@ -41,7 +41,7 @@ sum(testing$classe==prediction)/length(testing$classe)
 # Finally we can run the prediction model to the 20 cases provided    
 testing2 <- read.csv("pml-testing.csv")
 prediction2 <- predict(modFit, testing2)
-cbind(testing2$problem_id, as.data.frame(prediction2))
+answers <- cbind(testing2$problem_id, as.data.frame(prediction2))
 
 # testing2$problem_id prediction2
 # 1                    1           B
@@ -67,7 +67,12 @@ cbind(testing2$problem_id, as.data.frame(prediction2))
 
 
 
+# create files
 
+for(i in 1:20){
+        filename = paste0("problem_id_",i,".txt")
+        write.table(answers[i,"prediction2"],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+}
 
 
 

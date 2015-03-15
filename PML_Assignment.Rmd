@@ -1,5 +1,5 @@
 ---
-title: "PracticalMachineLearning_Assignment.rmd"
+title: "Practical Machine Learning Assignment"
 output: html_document
 ---  
   
@@ -36,7 +36,7 @@ modFit <- train(classe ~ ., data=training, method="rf")
 ```
 
 
-Finaly we run the prediction model to the testing data and run cross-validation table to check the error
+We run the prediction model to the in-sample testing data and run cross-validation table to check the error
 ```{r}
 prediction <- predict(modFit, testing)
 table(testing$classe, prediction)
@@ -44,5 +44,16 @@ sum(testing$classe==prediction)/length(testing$classe)
 ```
 
 
-We estimate less then 2% out of sample error
+Thus we estimate less then 2% out-of-sample error.  
+  
+Finally we can run the prediction model to the 20 cases provided    
+```{r}
+testing2 <- read.csv("pml-testing.csv")
+prediction2 <- predict(modFit, testing2)
+cbind(testing2$problem_id, prediction2)
+```
+
+
+
+
 
